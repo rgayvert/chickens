@@ -1,0 +1,165 @@
+{
+  "annotations": [
+    {
+      "contents": "## RecapEditorProvider.getHtmlForWebview() returns the initial page contents\n\n\n",
+      "id": 0,
+      "changed": false,
+      "primaryLinkTarget": {
+        "file": "src/vscode/RecapEditor.ts",
+        "selections": [
+          [
+            12,
+            0,
+            14,
+            1
+          ],
+          [
+            22,
+            0,
+            27,
+            1
+          ]
+        ],
+        "targetText": "interface RecapDocumentDelegate {",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## This is a title\n\nabcdefg\n\n\n",
+      "id": 1,
+      "changed": false,
+      "primaryLinkTarget": {
+        "file": "src/vscode/extension.ts",
+        "selections": [
+          [
+            3,
+            0,
+            7,
+            0
+          ]
+        ],
+        "targetText": "export function activate(context: vscode",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## A **nonce** (generated only once) token is created.\n\n\nThis token is passed to the page [security policy](src/vscode/RecapEditor.ts:538,0,539,0) \nand each of the [scripts](src/vscode/RecapEditor.ts:602,0,604,63) in the page.\n\n\n",
+      "id": 2,
+      "changed": false,
+      "primaryLinkTarget": {
+        "file": "src/vscode/util.ts",
+        "selections": [
+          [
+            25,
+            0,
+            33,
+            1
+          ]
+        ],
+        "targetText": "export function quickDebug(s: string): v",
+        "targetOffset": 2
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## The paths to the scripts and stylesheets are [converted](recaps/assets/markdown-samples.md:28,0,30,7) to URIs that VS Code will allow.\n\n\n",
+      "id": 3,
+      "changed": false,
+      "primaryLinkTarget": {
+        "file": "src/vscode/util.ts",
+        "selections": [
+          [
+            3,
+            2,
+            3,
+            2
+          ]
+        ],
+        "targetText": "",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": [
+        {
+          "file": "recaps/assets/markdown-samples.md",
+          "selections": [
+            [
+              28,
+              0,
+              30,
+              7
+            ]
+          ],
+          "targetText": "* One\n* Two\n* Three",
+          "targetOffset": 0
+        }
+      ]
+    },
+    {
+      "contents": "## If a custom CSS file exists (recap.css), it is included.\n \n\nHere's a [markdown](src/vscode/RecapEditor.ts:516,0,520,0) link.\n\n\n",
+      "id": 4,
+      "changed": false,
+      "primaryLinkTarget": {
+        "file": "src/vscode/RecapEditor.ts",
+        "selections": [
+          [
+            16,
+            0,
+            28,
+            0
+          ]
+        ],
+        "targetText": "interface MessageArgs {",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": [
+        {
+          "file": "media/recap.css",
+          "selections": [
+            [
+              30,
+              0,
+              35,
+              1
+            ]
+          ],
+          "targetText": "body.vscode-dark {",
+          "targetOffset": 0
+        },
+        {
+          "file": "src/RecapEditor.ts",
+          "selections": [
+            [
+              516,
+              0,
+              520,
+              0
+            ]
+          ],
+          "targetText": "// Local css paths",
+          "targetOffset": 0
+        }
+      ]
+    },
+    {
+      "contents": "## The static components of the page are added:\n\nthe container for [notes](recaps/sample.recap)\n\nthe selection detail\n\nthe bottom toolbar\n\nthe edit toolbar\n\n\n",
+      "id": 5,
+      "changed": false,
+      "primaryLinkTarget": {
+        "file": "src/recap-web/Extension.js",
+        "selections": [
+          [
+            17,
+            0,
+            25,
+            3
+          ]
+        ],
+        "targetText": "// Messages to the extension",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    }
+  ]
+}

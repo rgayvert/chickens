@@ -1,0 +1,34 @@
+{
+  "annotations": [
+    {
+      "contents": "## Viewing Commands\n\n\n| Icon | Description |\n| ---- | ----------- |\n| <i class=\"codicon codicon-expand-all\"/> | Expands all notes in the current recap document. |\n| <i class=\"codicon codicon-collapse-all\"/> | Collapses all notes in the current recap document. |\n| <i class=\"codicon codicon-menu\"/> | Switch between viewing and presentation modes |\n| <i class=\"codicon codicon-zoom-in\"/> | Increases the font size |\n| <i class=\"codicon codicon-zoom-out\"/> | Increases the font size |\n| <i class=\"codicon codicon-arrow-down\"/> | Move to the next note |\n| <i class=\"codicon codicon-arrow-up\"/> | Move to the previous note |\n| <i class=\"codicon codicon-arrow-circle-right\"/> | Open another recap file in the same directory |\n| <i class=\"codicon codicon-question\"/> | View this help recap |\n| <i class=\"codicon codicon-edit\"/> | Toggle edit mode |\n\n\n",
+      "id": 0,
+      "primaryLinkTarget": {
+        "selections": [],
+        "targetText": "",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Editing Commands\n\n| Icon | Description |\n| ---- | ----------- |\n| <i class=\"codicon codicon-plus\"/> | Adds a new note below the current note. |\n| <i class=\"codicon codicon-remove\"/> | Deletes the current note. |\n| <i class=\"codicon codicon-link-external\"/> | Link the current note to the most recent selection in VS Code |\n| <i class=\"codicon codicon-discard\"/> | Remove the current note's link |\n| <i class=\"codicon codicon-chevron-down\"/> | Move the current note down one position |\n| <i class=\"codicon codicon-chevron-up\"/> | Move the current note up one position |\n| <i class=\"codicon codicon-markdown\"/> | Copy the markdown text in the current note to the clipboard |\n| <i class=\"codicon codicon-code\"/> | Copy the generated HTML of the current note to the clipboard |\n| <i class=\"codicon codicon-link\"/> | Link the selected text in the current note to the most recent selection in VS Code |\n\n\n",
+      "id": 1,
+      "primaryLinkTarget": {
+        "selections": [],
+        "targetText": "",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Caveats and Limitations\n\n\n+ VS Code does not allow inline styles, so some features might not work (e.g., text-alignment in tables).\n\n\n",
+      "id": 2,
+      "primaryLinkTarget": {
+        "selections": [],
+        "targetText": "",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    }
+  ]
+}
