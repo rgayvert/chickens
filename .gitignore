@@ -6,7 +6,6 @@
 *.map
 node_modules
 out
-recaps
 *.vsix
 
 
