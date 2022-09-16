@@ -1,0 +1,12 @@
+.vscode/*
+.vscodeignore
+.eslintignore
+.eslintrc.js
+.DS_Store
+*.map
+node_modules
+out
+recaps
+*.vsix
+
+
