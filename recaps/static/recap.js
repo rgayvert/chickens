@@ -258,6 +258,8 @@ const z_1 = __webpack_require__(813);
 const ZInterval_1 = __webpack_require__(961);
 class LinkTarget {
     constructor(file, selections, targetText = "", targetOffset = 0) {
+        this.text = "";
+        this.html = "";
         this.file = file;
         this.selections = selections || [];
         this.targetText = targetText;
