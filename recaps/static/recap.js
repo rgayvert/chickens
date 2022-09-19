@@ -3540,7 +3540,7 @@ async function openFirstRecap() {
     const response = await fetch("../recaps.json");
     const json = await response.json();
     const firstRecapFile = json.recaps[0];
-    RecapWebRoot_1.default.openOn(firstRecapFile[1]);
+    RecapWebRoot_1.default.openOn("../../"+firstRecapFile[1]);
 }
 if (Extension_1.default.vscode) {
     ZView_1.default.createRootView(Webview_1.default);
