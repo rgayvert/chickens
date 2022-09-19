@@ -3537,7 +3537,7 @@ catch {
 }
 RecapStyle_1.default.initialize();
 async function openFirstRecap() {
-    const response = await fetch("recaps.json");
+    const response = await fetch("../recaps.json");
     const json = await response.json();
     const firstRecapFile = json.recaps[0];
     RecapWebRoot_1.default.openOn(firstRecapFile);
