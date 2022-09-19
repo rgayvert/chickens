@@ -2146,7 +2146,7 @@ class RecapWebRoot extends ZView_1.default {
             linkTarget.html = MarkdownConverter_1.default.highlight(linkTarget.text);
         }
         else {
-            linkTarget.html = "Target file note found: " + linkTarget.file;
+            linkTarget.html = "Target file not found: " + linkTarget.file;
         }
         this.linkTargetProp.set(linkTarget);
     }
@@ -3261,6 +3261,9 @@ class ZView {
         return ZInterval_1.default.create(start, end);
     }
     convertIntervalToRange(interval) {
+        if (interval.isNull()) {
+            return null;
+        }
         this.elt.normalize();
         const range = document.createRange();
         const startNode = this.getNodeAtPosition(interval.start);
@@ -3315,12 +3318,14 @@ class ZView {
             return;
         }
         const range = this.convertIntervalToRange(ZInterval_1.default.create(pos, pos));
-        const textNode = document.createTextNode(text);
-        range.insertNode(textNode);
-        range.selectNodeContents(textNode);
-        range.collapse(false);
-        const end = position + text.length;
-        this.setSelectionInterval(ZInterval_1.default.create(end, end));
+        if (range) {
+            const textNode = document.createTextNode(text);
+            range.insertNode(textNode);
+            range.selectNodeContents(textNode);
+            range.collapse(false);
+            const end = position + text.length;
+            this.setSelectionInterval(ZInterval_1.default.create(end, end));
+        }
     }
 }
 exports.ZView = ZView;
