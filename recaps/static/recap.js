@@ -1651,7 +1651,7 @@ class NotesContainer extends ZView_1.default {
     }
     selectedNoteViewChanged() {
         this.indexOfSelectedNoteViewProp.set(this.noteViews().indexOf(this.selectedNoteView()));
-        Extension_1.default.showLink(this.selectedNoteView()?.note.primaryLinkTarget);
+        //Extension.showLink(this.selectedNoteView()?.note.primaryLinkTarget);
     }
     mostRecentSelectionIsValid() {
         return this.mostRecentSelectionProp.get().isValid();
@@ -2144,11 +2144,11 @@ class RecapWebRoot extends ZView_1.default {
         if (data.ok) {
             linkTarget.text = await data.text();
             linkTarget.html = MarkdownConverter_1.default.highlight(linkTarget.text);
-            this.linkTargetProp.set(linkTarget);
         }
         else {
-            this.linkTargetProp.set(LinkTarget_1.default.emptyLinkTarget);
+            linkTarget.html = "Target file note found: " + linkTarget.file;
         }
+        this.linkTargetProp.set(linkTarget);
     }
     render() {
         this.addChild({ name: "webview", viewClass: Webview_1.default, params: this.webviewParams });
