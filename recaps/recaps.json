@@ -1,3 +1,8 @@
 {
-    "First recap": "initial-html/index.html"
+  "recaps": [
+    [
+      "initial-html",
+      "./recaps/initial-html.recap"
+    ]
+  ]
 }
