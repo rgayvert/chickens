@@ -2115,6 +2115,7 @@ exports["default"] = RecapToolbar;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const ZView_1 = __webpack_require__(928);
 const Webview_1 = __webpack_require__(602);
+const LinkTarget_1 = __webpack_require__(361);
 const LinkTargetView_1 = __webpack_require__(817);
 const Extension_1 = __webpack_require__(732);
 const MarkdownConverter_1 = __webpack_require__(363);
@@ -2134,9 +2135,14 @@ class RecapWebRoot extends ZView_1.default {
     }
     async showLink(linkTarget) {
         const data = await fetch("../../" + linkTarget.file);
-        linkTarget.text = await data.text();
-        linkTarget.html = MarkdownConverter_1.default.highlight(linkTarget.text);
-        this.linkTargetProp.set(linkTarget);
+        if (data.ok) {
+            linkTarget.text = await data.text();
+            linkTarget.html = MarkdownConverter_1.default.highlight(linkTarget.text);
+            this.linkTargetProp.set(linkTarget);
+        }
+        else {
+            this.linkTargetProp.set(LinkTarget_1.default.emptyLinkTarget);
+        }
     }
     render() {
         this.addChild({ name: "webview", viewClass: Webview_1.default, params: this.webviewParams });
