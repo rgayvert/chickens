@@ -1,8 +1,16 @@
 {
   "recaps": [
     [
+      "sample3",
+      "./more_recaps/sample3.recap"
+    ],
+    [
       "initial-html",
       "./recaps/initial-html.recap"
+    ],
+    [
+      "sample2",
+      "./recaps/sample2.recap"
     ]
   ]
 }

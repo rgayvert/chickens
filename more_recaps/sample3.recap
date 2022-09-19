@@ -1,0 +1,101 @@
+{
+  "annotations": [
+    {
+      "markdownLinkTargets": [
+        {
+          "file": "src/vscode/RecapEditor.ts",
+          "selections": [
+            [
+              16,
+              0,
+              21,
+              0
+            ]
+          ],
+          "targetText": "interface MessageArgs {",
+          "targetOffset": 0
+        }
+      ],
+      "contents": "## Creating a new recap file\nTo start a new recap, just add a file to your project and give it a .recap extension.\nThe recap editor [will](src/vscode/RecapEditor.ts:16,0,21,0) open with an empty note to begin.\n\n\nxx  \n\n\n",
+      "id": 0,
+      "changed": false,
+      "primaryLinkTarget": {
+        "file": "",
+        "selections": [],
+        "targetText": "",
+        "targetOffset": 0
+      }
+    },
+    {
+      "markdownLinkTargets": [],
+      "contents": "## Adding a note\nTo add a note, either:\n  * click on the '+' icon; or\n  * run the command \"Recap: Add a new recap note\"",
+      "id": 1,
+      "changed": false,
+      "primaryLinkTarget": {
+        "file": "",
+        "selections": [],
+        "targetText": "",
+        "targetOffset": 0
+      }
+    },
+    {
+      "markdownLinkTargets": [],
+      "contents": "## Deleting a note\nTo delete a note, click on the '-' icon.",
+      "id": 2,
+      "changed": false,
+      "primaryLinkTarget": {
+        "file": "",
+        "selections": [],
+        "targetText": "",
+        "targetOffset": 0
+      }
+    },
+    {
+      "markdownLinkTargets": [],
+      "contents": "## Creating note links\nTo link a note to one of your source files:\n  1. Open your source file in another view\n  2. Select a region \n  3. Click on the link button \nThe border of the note will change from dotted to solid, and a description of your\nlink will appear in the note toolbar.",
+      "id": 3,
+      "changed": false,
+      "primaryLinkTarget": {
+        "file": "",
+        "selections": [],
+        "targetText": "",
+        "targetOffset": 0
+      }
+    },
+    {
+      "markdownLinkTargets": [],
+      "contents": "## Creating Markdown links\nTo create a link inside the markdown within a note to a source file:\n  1. Make a selection in your source file\n  2. Click on the markdown link button\nYour markdown selection will be modified to include a special link.",
+      "id": 4,
+      "changed": false,
+      "primaryLinkTarget": {
+        "file": "",
+        "selections": [],
+        "targetText": "",
+        "targetOffset": 0
+      }
+    },
+    {
+      "markdownLinkTargets": [],
+      "contents": "## This is a new note\n\n\n",
+      "id": 5,
+      "changed": false,
+      "primaryLinkTarget": {
+        "selections": [],
+        "targetText": "",
+        "targetOffset": 0
+      }
+    },
+    {
+      "markdownLinkTargets": [],
+      "contents": "## Adding an image\nRecap markdown can contain HTML tags, including images. You can use the usual markdown \nsyntax. The path for an image must contain a path which is relative to the project\nworkspace root.\n<br/><br/>\n    <img src=\"./media/recap-icon.png\" class=\"center logo-image\">",
+      "id": 6,
+      "changed": false,
+      "primaryLinkTarget": {
+        "file": "",
+        "selections": [],
+        "targetText": "",
+        "targetOffset": 0
+      }
+    }
+  ]
+}
