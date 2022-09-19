@@ -2133,7 +2133,7 @@ class RecapWebRoot extends ZView_1.default {
         root.loadRecapFile(recapFileName);
     }
     async showLink(linkTarget) {
-        const data = await fetch(linkTarget.file);
+        const data = await fetch("../../" + linkTarget.file);
         linkTarget.text = await data.text();
         linkTarget.html = MarkdownConverter_1.default.highlight(linkTarget.text);
         this.linkTargetProp.set(linkTarget);
