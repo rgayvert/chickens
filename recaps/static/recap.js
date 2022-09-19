@@ -3539,7 +3539,7 @@ RecapStyle_1.default.initialize();
 async function openFirstRecap() {
     const response = await fetch("../recaps.json");
     const json = await response.json();
-    const firstRecapFile = json.recaps[0];
+    const firstRecapFile = json.recaps[0][1];
     RecapWebRoot_1.default.openOn("../../" + firstRecapFile);
 }
 if (Extension_1.default.vscode) {
