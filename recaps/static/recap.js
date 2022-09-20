@@ -2143,7 +2143,7 @@ class RecapWebRoot extends ZView_1.default {
     }
     setRecapList(recapList) {
         this.recapList = recapList;
-        this.loadRecapFile(recapList[0].path);
+        this.loadRecapFile("../../" + recapList[0].path);
     }
     async showLink(linkTarget) {
         if (!linkTarget.file) {
