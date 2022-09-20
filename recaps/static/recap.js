@@ -1514,8 +1514,13 @@ class NotesContainer extends ZView_1.default {
             [params.editModeProp, "editable"],
             [this.presentationProp, "presentation"],
         ]);
+        this.params.documentProp.addAction(this.createAction(this.documentChanged));
         NotesContainerExtension_1.default.initialize(this.extensionParams);
         document.addEventListener('selectionchange', (event) => this.selectionChanged(event));
+    }
+    documentChanged() {
+        this.selectedNoteViewProp.set(null);
+        this.indexOfSelectedNoteViewProp.set(0);
     }
     selectionChanged(event) {
         this.textSelectionProp.set(window.getSelection());
@@ -1591,7 +1596,7 @@ class NotesContainer extends ZView_1.default {
     }
     afterRender() {
         if (this.document() === RecapDocument_1.default.nullDocument) {
-            // we're in the process of reverting
+            // we're in the process of reverting or loading a new document
             return;
         }
         if (this.documentIsEmpty()) {
