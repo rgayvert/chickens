@@ -768,8 +768,8 @@ class MainToolbar extends RecapToolbar_1.default {
             .addButton("goUp", "arrow-up", "Go to previous note", this.params.goUpAction)
             .addButton("quickPick", "arrow-circle-right", "Open other recap file", this.params.quickPickAction);
         if (Extension_1.default.isWebContext()) {
-            this.addBlank(3)
-                .addButton("toggleTargetView", "layout-sidebar-right", "Toggle target view", this.params.toggleTargetViewAction);
+            this.addBlank(3);
+            //.addButton("toggleTargetView", "layout-sidebar-right", "Toggle target view", this.params.toggleTargetViewAction);
         }
         else {
             this.addButton("viewHelp", "question", "View Recap help", this.params.viewHelpAction)
@@ -3626,21 +3626,27 @@ catch {
     Extension_1.default.vscode = null;
 }
 RecapStyle_1.default.initialize();
-async function openFirstRecap() {
+async function openOnRecapJSON() {
     const response = await fetch("../recaps.json");
     if (!response.ok) {
         // TODO: show error page
         return;
     }
     const json = await response.json();
-    //const firstRecapFile = json.recaps[0].path;
     RecapWebRoot_1.default.openOn(json.recaps);
 }
 if (Extension_1.default.vscode) {
     ZView_1.default.createRootView(Webview_1.default);
 }
 else {
-    openFirstRecap();
+    const params = (new URL(document.location.toString())).searchParams;
+    const recapFile = params.get("recap");
+    if (recapFile) {
+        RecapWebRoot_1.default.openOn([{ title: "", path: recapFile }]);
+    }
+    else {
+        openOnRecapJSON();
+    }
 }
 //
 // Exports for web context
