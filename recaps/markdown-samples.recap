@@ -1,0 +1,188 @@
+{
+  "annotations": [
+    {
+      "contents": "## Recap Markdown\n\n\nRecap markdown is generated with the [markdown-it](https://github.com/markdown-it/markdown-it) \nand [dompurify](https://github.com/cure53/DOMPurify) libraries, along with some custom \nmassaging of paths.\n<br/><br/>\nAs with any markdown converter, there are some quirks to deal with. This recap provides some \nexamples of markdown that can be used in recap to produce consistent results.\n<br/><br/> \n\n",
+      "id": 0,
+      "primaryLinkTarget": {
+        "file": "recaps/assets/markdown-samples.md",
+        "selections": [
+          [
+            1,
+            0,
+            3,
+            48
+          ]
+        ],
+        "targetText": "",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Headings\n\n\n# First-level heading\n<br/>\n\n## Second-level heading\n<br/><br/>\n\n### Third-level heading\n<br/><br/>\n\n#### Fourth-level heading\n<br/><br/>\n\n\n\n\n",
+      "id": 1,
+      "primaryLinkTarget": {
+        "file": "recaps/assets/markdown-samples.md",
+        "selections": [
+          [
+            6,
+            0,
+            9,
+            25
+          ]
+        ],
+        "targetText": "",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Simple formatting\n\n\nThis is *italicized* text.\n<br/><br/>\nThis is **strong** text.\n<br/><br/>\n~~This is a mistake~~\n<br/><br/>\n\n\n\n\n",
+      "id": 2,
+      "primaryLinkTarget": {
+        "file": "recaps/assets/markdown-samples.md",
+        "selections": [
+          [
+            12,
+            0,
+            14,
+            21
+          ]
+        ],
+        "targetText": "",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Quoted text\n\n\nPlain text.  \n<br/>\n> Here is a block of quoted text. Two extra spaces at the end of the line provide a line break.  \n> A second line.\n<br/><br/>\n\n",
+      "id": 3,
+      "primaryLinkTarget": {
+        "file": "recaps/assets/markdown-samples.md",
+        "selections": [
+          [
+            17,
+            0,
+            18,
+            16
+          ]
+        ],
+        "targetText": "",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Code blocks\n\n\nTriple backticks work best here:  \n<br/>\n```\n    git status\n    git add\n    git commit\n```\n<br/>\n\n",
+      "id": 4,
+      "primaryLinkTarget": {
+        "file": "recaps/assets/markdown-samples.md",
+        "selections": [
+          [
+            21,
+            0,
+            25,
+            3
+          ]
+        ],
+        "targetText": "",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Lists\n\n* One\n* Two\n* Three\n\n\n1. One\n2. Two\n3. Three\n\n\n* One\n    + A\n    + B\n* Two\n    + C\n    + D\n\n\n\n",
+      "id": 5,
+      "primaryLinkTarget": {
+        "file": "recaps/assets/markdown-samples.md",
+        "selections": [
+          [
+            28,
+            0,
+            44,
+            6
+          ]
+        ],
+        "targetText": "",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Images\n\nImages may be included using either Markdown syntax or HTML tags. For an image to show up in a note,\nthe image path must be a local path relative to the workspace root. \n<br/><br/>\n\n\n[Markdown example](recaps/assets/markdown-samples.md:47,0,47,33)\n<br/><br/>\n![recap](recaps/assets/recap.png)\n<br/><br/>\n\n[HTML img tag with centering and sizing](recaps/assets/markdown-samples.md:49,0,49,74)\n<br/><br/>\n<img src=\"recaps/assets/recap.png\" alt=\"recap\" class=\"center logo-image\" >\n<br/><br/>\n\n\n[Inline example]\nHere is an example of an [image](recaps/assets/markdown-samples.md:51,0,51,43) \n![inline-example](recaps/assets/info16.png) which is inline with text.\n<br/><br/>\n\nHere's an [image](recaps/assets/markdown-samples.md:53,0,53,86) \n<img src=\"recaps/assets/info48.png\" alt=\"inline-example-2\" class=\"inline-image-16x16\">\nthat uses custom CSS for better control.\n<br/><br/>\n\n\n\n",
+      "id": 6,
+      "primaryLinkTarget": {
+        "file": "recaps/assets/markdown-samples.md",
+        "selections": [
+          [
+            47,
+            0,
+            55,
+            0
+          ]
+        ],
+        "targetText": "",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Links\n\n\nThe link tool \n<img src=\"recaps/assets/codicon-link.png\" class=\"inline-image-16x16 invert\"> creates special markdown that is interpreted by Recap as \na command URI. For example, \n<br/><br>\n```\n    [Markdown example](recaplink?recaps/assets/markdown-samples.md)\n```\n<br/><br>\nis transformed in the final HTML as\n<br/><br>\n```\n    <a href=\"command:recap.showlink?%5B%7B%22file%22%3A%22recaps%2Fassets%2Fmarkdown-samples.md\">Markdown example</a>\n```\n\n<br/><br/>\n\n",
+      "id": 7,
+      "primaryLinkTarget": {
+        "file": "",
+        "selections": [],
+        "targetText": "",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## External links\n\n\nHere is a link to an external [website](https://code.visualstudio.com/).\nNote that this will open in your default browser.\n<br/><br/>\n\nYou should use https in external links. If you use http or don't specify the protocol, VS Code may\nreject the link.\n\n\n\n ",
+      "id": 8,
+      "primaryLinkTarget": {
+        "file": "recaps/assets/markdown-samples.md",
+        "selections": [
+          [
+            52,
+            0,
+            52,
+            42
+          ]
+        ],
+        "targetText": "",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Custom CSS\nVS Code doesn't like inline CSS, but you can add your own CSS by placing it in a file named recap.css in the same \nfolder as the recap file.  \n<br/>\nNote that the logo-image class used in the image example is defined this way.  \n<br/>\n",
+      "id": 9,
+      "primaryLinkTarget": {
+        "file": "media/recap.css",
+        "selections": [
+          [
+            8,
+            0,
+            8,
+            0
+          ]
+        ],
+        "targetText": "",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Linking to another recap file\nYou can create a link to a different [recap](recaps/sample.recap) file by manually entering an expression of the form\n<br/><br/>\n\n```\n[Another recap file](recaps/sample.recap)\n```\n\n\n<br/><br/>\nThis will be transformed by Recap into the command URI\n<br/><br/>\n```\n<a href=\"command:recap.openrecap?%5B%7B%22file%22%3A%22recaps%2Fsample.recap%22%7D%5D\">recap</a>\n```\n<br/><br/>\n\n\n",
+      "id": 10,
+      "primaryLinkTarget": {
+        "file": "",
+        "selections": [],
+        "targetText": "",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    }
+  ]
+}
