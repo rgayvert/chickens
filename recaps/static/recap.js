@@ -2287,13 +2287,15 @@ class Webview extends ZView_1.default {
         Extension_1.default.quickPickRecapFile();
     }
     loadRecapDocument(text) {
+        this.documentProp.set(RecapDocument_1.default.nullDocument);
+        this.annotationsProp.set([]);
         const doc = new RecapDocument_1.default(text);
         this.documentProp.set(doc);
         this.annotationsProp.set(doc.annotations);
     }
     revert(text) {
-        this.documentProp.set(RecapDocument_1.default.nullDocument);
-        this.annotationsProp.set([]);
+        //this.documentProp.set(RecapDocument.nullDocument);
+        //this.annotationsProp.set([]);
         this.loadRecapDocument(text);
     }
 }
