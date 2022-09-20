@@ -1,12 +1,16 @@
 {
   "recaps": [
-    [
-      "initial-html",
-      "./recaps/initial-html.recap"
-    ],
-    [
-      "sample",
-      "./recaps/sample.recap"
-    ]
+    {
+      "title": "initial-html",
+      "path": "./recaps/initial-html.recap"
+    },
+    {
+      "title": "markdown-samples",
+      "path": "./recaps/markdown-samples.recap"
+    },
+    {
+      "title": "sample",
+      "path": "./recaps/sample.recap"
+    }
   ]
 }

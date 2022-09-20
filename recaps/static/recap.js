@@ -47,7 +47,12 @@ class Extension {
         this.vscode?.postMessage({ type: "logError", args });
     }
     static quickPickRecapFile() {
-        this.vscode?.postMessage({ type: "quickPick" });
+        if (this.isWebContext()) {
+            //
+        }
+        else {
+            this.vscode?.postMessage({ type: "quickPick" });
+        }
     }
     static returnFileData(data, requestId) {
         this.vscode?.postMessage({
@@ -759,10 +764,10 @@ class MainToolbar extends RecapToolbar_1.default {
             .addButton("increaseSize", "zoom-in", "Increase size", this.params.increaseSizeAction)
             .addButton("decreaseSize", "zoom-out", "Decrease size", this.params.decreaseSizeAction)
             .addButton("goDown", "arrow-down", "Go to next note", this.params.goDownAction)
-            .addButton("goUp", "arrow-up", "Go to previous note", this.params.goUpAction);
+            .addButton("goUp", "arrow-up", "Go to previous note", this.params.goUpAction)
+            .addButton("quickPick", "arrow-circle-right", "Open other recap file", this.params.quickPickAction);
         if (!Extension_1.default.isWebContext()) {
-            this.addButton("quickPick", "arrow-circle-right", "Open other recap file", this.params.quickPickAction)
-                .addButton("viewHelp", "question", "View Recap help", this.params.viewHelpAction)
+            this.addButton("viewHelp", "question", "View Recap help", this.params.viewHelpAction)
                 .addButton("export", "export", "Export web bundle", this.params.exportWebBundleAction)
                 .addBlank(3)
                 .addButton("toggleEdit", "edit", "Toggle edit mode", this.params.toggleEditAction, this.toggleEditStyle);
@@ -2125,15 +2130,20 @@ class RecapWebRoot extends ZView_1.default {
     constructor(name, params, tagName = "body") {
         super(name, params, tagName);
         this.linkTargetProp = this.createProp(null);
+        this.recapList = [];
         this.params = params;
         this.webviewParams = { style: Webview_1.default.defaultStyle };
         this.linkTargetParams = { linkTargetProp: this.linkTargetProp };
         Extension_1.default.showLinkAction = this.createAction(this.showLink);
     }
-    static openOn(recapFileName) {
+    static openOn(recapList) {
         const params = { style: this.defaultStyle };
         const root = ZView_1.default.createRootView(RecapWebRoot, params);
-        root.loadRecapFile(recapFileName);
+        root.setRecapList(recapList);
+    }
+    setRecapList(recapList) {
+        this.recapList = recapList;
+        this.loadRecapFile(recapList[0].path);
     }
     async showLink(linkTarget) {
         if (!linkTarget.file) {
@@ -2193,6 +2203,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const ZView_1 = __webpack_require__(928);
 const NotesContainer_1 = __webpack_require__(412);
 const RecapDocument_1 = __webpack_require__(694);
+const Extension_1 = __webpack_require__(732);
 const RootExtension_1 = __webpack_require__(896);
 const MarkdownConverter_1 = __webpack_require__(363);
 class Webview extends ZView_1.default {
@@ -2248,7 +2259,7 @@ class Webview extends ZView_1.default {
         this.documentProp.set(document);
     }
     goBack() {
-        RootExtension_1.default.goToPreviousRecapFile();
+        Extension_1.default.goToPreviousRecapFile();
     }
     updateConfig({ includeTargetText, targetTextLength, outputFileSpacing }) {
         this.includeTargetTextProp.set(includeTargetText);
@@ -2256,7 +2267,7 @@ class Webview extends ZView_1.default {
         this.outputFileSpacingProp.set(outputFileSpacing);
     }
     quickPickRecapFile() {
-        RootExtension_1.default.quickPickRecapFile();
+        Extension_1.default.quickPickRecapFile();
     }
     loadRecapDocument(text) {
         const doc = new RecapDocument_1.default(text);
@@ -2717,7 +2728,8 @@ class ZView {
         this.viewsToRender = [];
     }
     static createRootView(viewClass, params = {}) {
-        const inst = new viewClass("root", params, "body");
+        const inst = new viewClass("root", params, "div");
+        document.body.appendChild(inst.elt);
         inst.fullRender();
         this.rootView = inst;
         return inst;
@@ -3540,7 +3552,7 @@ var __webpack_exports__ = {};
 var exports = __webpack_exports__;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.showLink = exports.openOn = void 0;
+exports.showLink = void 0;
 const ZView_1 = __webpack_require__(928);
 const Extension_1 = __webpack_require__(732);
 const Webview_1 = __webpack_require__(602);
@@ -3555,9 +3567,13 @@ catch {
 RecapStyle_1.default.initialize();
 async function openFirstRecap() {
     const response = await fetch("../recaps.json");
+    if (!response.ok) {
+        // TODO: show error page
+        return;
+    }
     const json = await response.json();
-    const firstRecapFile = json.recaps[0][1];
-    RecapWebRoot_1.default.openOn("../../" + firstRecapFile);
+    //const firstRecapFile = json.recaps[0].path;
+    RecapWebRoot_1.default.openOn(json.recaps);
 }
 if (Extension_1.default.vscode) {
     ZView_1.default.createRootView(Webview_1.default);
@@ -3568,10 +3584,9 @@ else {
 //
 // Exports for web context
 //
-function openOn(recapFile) {
-    RecapWebRoot_1.default.openOn(recapFile);
-}
-exports.openOn = openOn;
+// export function openOn(recapFile: string) {
+//   RecapWebRoot.openOn(recapFile);
+// }
 function showLink(linkTarget) {
     Extension_1.default.showMarkdownLink(linkTarget);
 }
