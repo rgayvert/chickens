@@ -2160,7 +2160,7 @@ class RecapWebRoot extends ZView_1.default {
     }
     setRecapList(recapList) {
         this.recapList = recapList;
-        this.loadRecapFile("../../" + recapList[0].path);
+        this.loadRecapFile(recapList[0].path);
     }
     async showLink(linkTarget) {
         if (!linkTarget.file) {
@@ -2182,7 +2182,7 @@ class RecapWebRoot extends ZView_1.default {
         this.addChild({ name: "linkTargetView", viewClass: LinkTargetView_1.default, params: this.linkTargetParams });
     }
     async loadRecapFile(recapFileName) {
-        const response = await fetch(recapFileName);
+        const response = await fetch("../../" + recapFileName);
         const recapContents = await response.text();
         const pluginFileNames = [
             "markdown-it-deflist.min.js",
