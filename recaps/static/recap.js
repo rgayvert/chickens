@@ -766,7 +766,11 @@ class MainToolbar extends RecapToolbar_1.default {
             .addButton("goDown", "arrow-down", "Go to next note", this.params.goDownAction)
             .addButton("goUp", "arrow-up", "Go to previous note", this.params.goUpAction)
             .addButton("quickPick", "arrow-circle-right", "Open other recap file", this.params.quickPickAction);
-        if (!Extension_1.default.isWebContext()) {
+        if (Extension_1.default.isWebContext()) {
+            this.addBlank(3)
+                .addButton("toggleTargetView", "layout-sidebar-right", "Toggle target view", this.params.toggleTargetViewAction);
+        }
+        else {
             this.addButton("viewHelp", "question", "View Recap help", this.params.viewHelpAction)
                 .addButton("export", "export", "Export web bundle", this.params.exportWebBundleAction)
                 .addBlank(3)
@@ -1525,6 +1529,7 @@ class NotesContainer extends ZView_1.default {
             increaseSizeAction: this.createAction(this.increaseSize, this.scaleFactorMayIncrease),
             quickPickAction: this.params.quickPickAction,
             toggleEditAction: this.createAction(this.toggleEdit),
+            toggleTargetViewAction: this.params.toggleTargetViewAction,
             toggleViewAction: this.createAction(this.toggleView),
             viewHelpAction: this.createAction(this.viewHelp),
             exportWebBundleAction: this.createAction(this.exportWebBundle),
@@ -2132,7 +2137,10 @@ class RecapWebRoot extends ZView_1.default {
         this.linkTargetProp = this.createProp(null);
         this.recapList = [];
         this.params = params;
-        this.webviewParams = { style: Webview_1.default.defaultStyle };
+        this.webviewParams = {
+            style: Webview_1.default.defaultStyle,
+            toggleTargetViewAction: this.createAction(this.toggleTargetView)
+        };
         this.linkTargetParams = { linkTargetProp: this.linkTargetProp };
         Extension_1.default.showLinkAction = this.createAction(this.showLink);
     }
@@ -2140,6 +2148,9 @@ class RecapWebRoot extends ZView_1.default {
         const params = { style: this.defaultStyle };
         const root = ZView_1.default.createRootView(RecapWebRoot, params);
         root.setRecapList(recapList);
+    }
+    toggleTargetView() {
+        // TODO
     }
     setRecapList(recapList) {
         this.recapList = recapList;
