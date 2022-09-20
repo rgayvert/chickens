@@ -9,6 +9,7 @@ var Recap;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const LinkTarget_1 = __webpack_require__(361);
+const ZView_1 = __webpack_require__(928);
 class Extension {
     static isWebContext() {
         return this.vscode === null;
@@ -48,7 +49,7 @@ class Extension {
     }
     static quickPickRecapFile() {
         if (this.isWebContext()) {
-            //
+            ZView_1.default.rootView.loadNextRecapFile();
         }
         else {
             this.vscode?.postMessage({ type: "quickPick" });
@@ -2136,6 +2137,7 @@ class RecapWebRoot extends ZView_1.default {
         super(name, params, tagName);
         this.linkTargetProp = this.createProp(null);
         this.recapList = [];
+        this.currentRecapIndex = 0;
         this.params = params;
         this.webviewParams = {
             style: Webview_1.default.defaultStyle,
@@ -2151,6 +2153,10 @@ class RecapWebRoot extends ZView_1.default {
     }
     toggleTargetView() {
         // TODO
+    }
+    loadNextRecapFile() {
+        const nextEntry = this.recapList[(this.currentRecapIndex + 1) % this.recapList.length];
+        this.loadRecapFile(nextEntry.path);
     }
     setRecapList(recapList) {
         this.recapList = recapList;
@@ -2188,7 +2194,7 @@ class RecapWebRoot extends ZView_1.default {
         const data = {
             includeTargetText: false,
             mayGoBack: false,
-            mayQuickPick: false,
+            mayQuickPick: (this.recapList.length > 1),
             outputFileSpacing: 2,
             rootPath: "",
             runtime: false,
