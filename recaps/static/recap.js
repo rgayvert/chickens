@@ -877,6 +877,7 @@ class NoteText extends ZView_1.default {
         }
     }
     handleFocus(event) {
+        console.log("handleFocus");
         this.hasFocus = true;
     }
     ignoreKeyEvent(event) {
@@ -920,6 +921,7 @@ class NoteText extends ZView_1.default {
         this.updateSelectionInterval();
     }
     handleClick(event) {
+        console.log("handleClick");
         this.focus();
         if (this.hasFocus) {
             this.params.textClickedAction.performWith(event);
@@ -1155,6 +1157,7 @@ exports["default"] = NoteText;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const ZView_1 = __webpack_require__(928);
+const ZProp_1 = __webpack_require__(904);
 const ZDisclosure_1 = __webpack_require__(788);
 const NoteText_1 = __webpack_require__(22);
 const EditToolbar_1 = __webpack_require__(892);
@@ -1169,6 +1172,7 @@ class NoteView extends ZView_1.default {
         this.note = params.note;
         this.selectedProp = this.createProp(false);
         this.expandedProp = this.createProp(false);
+        this.expandedProp.addAction(this.createAction(this.expansionChanged));
         this.textClickedAction = this.createAction(this.textClicked);
         this.primaryLinkTargetProp = this.createProp(this.note.primaryLinkTarget);
         this.linkDetailProp = this.createProp(this.primaryLinkDescription());
@@ -1220,8 +1224,17 @@ class NoteView extends ZView_1.default {
             textClickedAction: this.textClickedAction,
         };
     }
-    textClicked() {
+    textClicked(event) {
         this.select().expand();
+    }
+    expansionChanged() {
+        const expandedNoteViewsProp = this.params.expandedNoteViewsProp;
+        if (this.isExpanded()) {
+            ZProp_1.default.addToSet(expandedNoteViewsProp, this);
+        }
+        else {
+            ZProp_1.default.deleteFromSet(expandedNoteViewsProp, this);
+        }
     }
     toggle() {
         this.expandedProp.toggle(true, false);
@@ -1284,8 +1297,11 @@ class NoteView extends ZView_1.default {
         return this.params.editModeProp.get();
     }
     handleClick(event) {
-        if (event.target instanceof Element && event.target?.tagName !== "A") {
-            this.textClicked();
+        if (event.target instanceof Element) {
+            const tag = event.target.tagName.toUpperCase();
+            if (tag !== "A" && tag !== "SUMMARY") {
+                this.textClicked(event);
+            }
         }
     }
     handleFocus() {
@@ -1422,7 +1438,7 @@ class NoteView extends ZView_1.default {
             ownerID: this.note.id,
             type: type,
             oldTarget: oldTarget,
-            newTarget: newTarget
+            newTarget: newTarget,
         };
         change.ownerClass = "NoteView";
         change.ownerID = this.note.id;
@@ -1497,6 +1513,7 @@ class NotesContainer extends ZView_1.default {
         this.style = this.createProp(this.currentStyle);
         this.scaleFactor = this.createProp(1.0);
         this.presentationProp = this.createProp(false);
+        this.expandedNoteViewsProp = this.createProp(new Set());
         this.indexOfSelectedNoteViewProp = this.createProp(0);
         this.mostRecentSelectionProp = this.createProp(LinkTarget_1.default.emptyLinkTarget);
         this.selectedNoteViewProp = this.createProp(null);
@@ -1558,6 +1575,7 @@ class NotesContainer extends ZView_1.default {
         return {
             ...this.editToolbarContainerParams,
             editModeProp: this.params.editModeProp,
+            expandedNoteViewsProp: this.expandedNoteViewsProp,
             presentationProp: this.presentationProp,
             rootPathProp: this.params.rootPathProp,
             selectedNoteViewProp: this.selectedNoteViewProp,
@@ -1648,10 +1666,12 @@ class NotesContainer extends ZView_1.default {
         return this.selectedNoteViewProp.get();
     }
     someViewsAreCollapsed() {
-        return !this.inPresentationMode() && this.noteViews().some((noteView) => !noteView.expandedProp.get());
+        return !this.inPresentationMode() && this.expandedNoteViewsProp.get().size < this.noteViews().length;
+        //  this.noteViews().some((noteView) => !noteView.expandedProp.get());
     }
     someViewsAreExpanded() {
-        return !this.inPresentationMode() && this.noteViews().some((noteView) => noteView.expandedProp.get());
+        return !this.inPresentationMode() && this.expandedNoteViewsProp.get().size > 0;
+        //return !this.inPresentationMode() && this.noteViews().some((noteView) => noteView.expandedProp.get());
     }
     scaleFactorMayDecrease() {
         return this.scaleFactor.get() > NotesContainer.minScaleFactor;
@@ -2434,6 +2454,7 @@ class ZDisclosure extends ZView_1.default {
         this.elt.appendChild(this.summary);
     }
     render() {
+        //this.update();
         if (!this.summary) {
             this.createSummary();
         }
@@ -2532,6 +2553,21 @@ class ZProp {
     }
     static create(val, owner) {
         return new ZProp(val, owner);
+    }
+    static addToSet(setProp, val) {
+        const set = setProp.get();
+        if (!set.has(val)) {
+            const arr = [...Array.from(set), val];
+            setProp.set(new Set(arr));
+        }
+    }
+    static deleteFromSet(setProp, val) {
+        const set = setProp.get();
+        if (set.has(val)) {
+            set.delete(val);
+            const arr = Array.from(set);
+            setProp.set(new Set(arr));
+        }
     }
     static nextID() {
         this._nextID = this._nextID + 1;
