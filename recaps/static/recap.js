@@ -2157,6 +2157,7 @@ class RecapWebRoot extends ZView_1.default {
     loadNextRecapFile() {
         const nextEntry = this.recapList[(this.currentRecapIndex + 1) % this.recapList.length];
         this.loadRecapFile(nextEntry.path);
+        this.currentRecapIndex = this.currentRecapIndex + 1;
     }
     setRecapList(recapList) {
         this.recapList = recapList;
