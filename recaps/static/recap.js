@@ -2072,7 +2072,7 @@ class RecapStyle {
             ".cursor-auto": "cursor:auto",
             ".overflow-break-word": "overflow-wrap:break-word",
             ".hover-pointer:hover": "cursor:pointer",
-            ".focus-none:focus-visible": "outline:0px",
+            //".focus-none:focus-visible": "outline:0px",
             ".recap-centered-title": "display:block;width:100%;text-align:center;margin-bottom:1.5rem",
             // tachyons
             ".ba": "border-style: solid; border-width: 1px",
