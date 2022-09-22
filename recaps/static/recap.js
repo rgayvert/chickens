@@ -1994,7 +1994,7 @@ class RecapStyle {
     static initializeRecapStyles() {
         const allStyles = {
             "recap-web-root": "flex w-100 vh-100 bg-vse items-center",
-            "webview": "w50 vh-100 bg-vse",
+            "webview": "w50 vh-100 bg-vse vh-100-s",
             "link-target-view": "w50 vh-100 ml2 pre bg-vse color-vsf font-family-vse overflow-y-scroll",
             "recap-top": "flex flex-column vh-100 bg-vse color-vsf font-size-vse font-family-vse ma0 pa0 overflow-hidden font-size-scaled",
             "recap-top-invalid": "flex flex-column justify-center f4 w-75 vh-100 maa ml4 orange",
@@ -2072,6 +2072,7 @@ class RecapStyle {
             ".cursor-auto": "cursor:auto",
             ".overflow-break-word": "overflow-wrap:break-word",
             ".hover-pointer:hover": "cursor:pointer",
+            // Safari doesn't like this one
             //".focus-none:focus-visible": "outline:0px",
             ".recap-centered-title": "display:block;width:100%;text-align:center;margin-bottom:1.5rem",
             // tachyons
@@ -2138,13 +2139,13 @@ class RecapStyle {
             ".tl": "text-align: left",
             ".top-0": "top: 0",
             ".truncate": "white-space: nowrap; overflow: hidden; text-overflow: ellipsis",
-            ".vh-100": "height: 100vh",
+            ".vh-100": "height: calc(100vh - 44px)",
             ".w-100": "width: 100%",
             ".w-75": "width: 75%",
             ".ws-normal": "white-space: normal",
             ".ws-pre-wrap": "white-space: pre-wrap",
             ".z-999": "z-index: 999",
-            "@media screen and (max-width: 45em)": ".dn-s { display: none }",
+            "@media screen and (max-width: 45em)": ".dn-s { display: none } .vh-100-s { height: calc(100vh - 44px) }",
             "mark": "background-color:#3BC2EB;color:black",
             ".bl--edited": "border-left-color:#ff4136;border-left-width:2px;border-left-style:solid",
         };
