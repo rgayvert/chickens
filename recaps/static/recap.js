@@ -9,7 +9,6 @@ var Recap;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const LinkTarget_1 = __webpack_require__(361);
-const ZView_1 = __webpack_require__(928);
 class Extension {
     static isWebContext() {
         return this.vscode === null;
@@ -47,13 +46,15 @@ class Extension {
     static logWebviewError(args) {
         this.vscode?.postMessage({ type: "logError", args });
     }
-    static quickPickRecapFile() {
-        if (this.isWebContext()) {
-            ZView_1.default.rootView.loadNextRecapFile();
-        }
-        else {
-            this.vscode?.postMessage({ type: "quickPick" });
-        }
+    // static quickPickRecapFile() {
+    //   if (this.isWebContext()) {
+    //     (ZView.rootView as RecapWebRoot).loadNextRecapFile();
+    //   } else {
+    //     this.vscode?.postMessage({ type: "quickPick" });
+    //   }
+    // }
+    static openOtherRecapFile(path) {
+        this.vscode?.postMessage({ type: "open", path: path });
     }
     static returnFileData(data, requestId) {
         this.vscode?.postMessage({
@@ -112,6 +113,7 @@ const LinkTarget_1 = __webpack_require__(361);
  *   goDown
  *   goUp
  *   linkNote
+ *   loadDocument
  *   //outputFolder
  *   redo
  *   saved
@@ -133,6 +135,7 @@ class NotesContainerExtension extends Extension_1.default {
             goDown: this.goDown,
             goUp: this.goUp,
             linkNote: this.linkNote,
+            //loadDocument: this.loadDocument,
             //outputFolder: this.exportWebBundle,
             redo: this.redo,
             revert: this.revert,
@@ -183,6 +186,9 @@ class NotesContainerExtension extends Extension_1.default {
     linkNote() {
         this.params.createNoteLinkAction.perform();
     }
+    // loadDocument(eventData: any) {
+    //   this.params.loadDocumentAction.performWith(eventData.body.content);
+    // }
     redo() {
         this.params.redoAction.perform();
     }
@@ -1602,6 +1608,7 @@ class NotesContainer extends ZView_1.default {
             exportWebBundleToFolderAction: this.createAction(this.exportWebBundle),
             goDownAction: this.mainToolbarParams.goDownAction,
             goUpAction: this.mainToolbarParams.goUpAction,
+            //loadDocumentAction: this.params.loadDocumentAction,
             prepareToSaveAction: this.createAction(this.prepareToSave),
             redoAction: this.createAction(this.redo),
             revertAction: this.params.revertAction,
@@ -1898,11 +1905,68 @@ class RecapButton extends ZView_1.default {
         if (this.clickAction?.isEnabled()) {
             this.makeInvisibleForMilliseconds(200);
             this.clickAction.performWith(event);
+            event.stopPropagation();
         }
     }
 }
 RecapButton.defaultStyle = "recap-toolbar-button";
 exports["default"] = RecapButton;
+
+
+/***/ }),
+
+/***/ 574:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RecapPopUp = void 0;
+const ZView_1 = __webpack_require__(928);
+const ZLabel_1 = __webpack_require__(974);
+class RecapPopUp extends ZView_1.default {
+    constructor(name, params) {
+        super(name, params);
+        this.params = params;
+        this.params.visibleProp.addAction(this.createAction(this.visibilityChanged));
+        this.windowClickHandler = this.handleWindowClick.bind(this);
+    }
+    handleWindowClick() {
+        this.close();
+    }
+    visibilityChanged(visible) {
+        if (visible) {
+            window.addEventListener("click", this.windowClickHandler);
+        }
+        else {
+            window.removeEventListener("click", this.windowClickHandler);
+        }
+    }
+    applyStyle() {
+        super.applyStyle();
+        const pos = this.params.positionProp.get();
+        const rect = this.clientRect();
+        this.setPosition(pos.x - rect.width + 10, pos.y - rect.height + 10);
+    }
+    render() {
+        this.params.itemsProp.get().forEach((item, index) => {
+            this.addChild({
+                name: "item-" + index,
+                viewClass: ZLabel_1.default,
+                params: {
+                    label: item,
+                    style: this.params.itemStyle,
+                    clickAction: this.params.clickAction
+                },
+            });
+        });
+    }
+    close() {
+        this.params.closeAction.perform();
+    }
+}
+exports.RecapPopUp = RecapPopUp;
+RecapPopUp.defaultStyle = "";
+exports["default"] = RecapPopUp;
 
 
 /***/ }),
@@ -1929,7 +1993,7 @@ class RecapStyle {
     }
     static initializeRecapStyles() {
         const allStyles = {
-            "recap-web-root": "flex w-100 vh-100 bg-vse",
+            "recap-web-root": "flex w-100 vh-100 bg-vse items-center",
             "webview": "w50 vh-100 bg-vse",
             "link-target-view": "w50 vh-100 ml2 pre bg-vse color-vsf font-family-vse overflow-y-scroll",
             "recap-top": "flex flex-column vh-100 bg-vse color-vsf font-size-vse font-family-vse ma0 pa0 overflow-hidden font-size-scaled",
@@ -1970,6 +2034,9 @@ class RecapStyle {
             "recap-toolbar-button-editable": "{recap-button-base} red",
             "recap-toolbar-button-disabled": "{recap-button-base} scale-12 cursor-auto o-30",
             "recap-centered-title": "db w-100 tc mb3",
+            "hidden": "dn",
+            "recapQuickPick": "db z-999 maxh50 fixed top-0 left-100 bg-lightgray ba br3 pa2",
+            "recapQuickPickItem": "hover-pointer f5 black-90 ma1 hover-bg-blue"
         };
         Object.keys(allStyles).forEach((selector) => {
             ZStyle_1.default.addCompositeStyle(selector, allStyles[selector]);
@@ -1993,6 +2060,8 @@ class RecapStyle {
             ".h800": "height:800px",
             ".scale-12": "transform:scale(1.2)",
             ".maa": "margin:auto",
+            ".maxh30": "max-height:30vh;overflow-y:scroll",
+            ".maxh50": "max-height:50vh;overflow-y:scroll",
             ".maxh70": "max-height:70vh;overflow-y:scroll",
             ".h100-20": "height:calc(100vh - 2.2rem)",
             ".h100-35": "height:calc(100vh - 3.5rem)",
@@ -2013,6 +2082,7 @@ class RecapStyle {
             ".b--red": "border-color: #ff4136",
             ".b--solid": "border-style: solid",
             ".bg-inherit": "background-color: inherit",
+            ".black-90": "color: rgba(0,0,0,0.9)",
             ".bn": "border-style: none; border-width: 0",
             ".bottom-0": "bottom: 0",
             ".bottom-2": "bottom: 2rem",
@@ -2029,9 +2099,11 @@ class RecapStyle {
             ".flex-column": "flex-direction: column",
             ".flex-grow-1": "flex-grow: 1",
             ".flex-row": "flex-direction: row",
+            ".hover-bg-blue:hover": "background-color: #aed1fe",
             ".hover-green:hover": "color: #19a974",
             ".justify-between": "justify-content: space-between",
             ".justify-center": "justify-content: center",
+            ".left-100": "left: 100px",
             ".ma0": "margin: 0",
             ".ma1": "margin: .25rem",
             ".ma2": "margin: .5rem",
@@ -2049,6 +2121,7 @@ class RecapStyle {
             ".overflow-y-scroll": "overflow-y: scroll",
             ".pa0": "padding: 0",
             ".pa1": "padding: .25rem",
+            ".pa2": "padding: .5rem",
             ".pa3": "padding: 1rem",
             ".pb1": "padding-bottom: .25rem",
             ".pb4": "padding-bottom: 2rem",
@@ -2063,12 +2136,14 @@ class RecapStyle {
             ".relative": "position: relative",
             ".tc": "text-align: center",
             ".tl": "text-align: left",
+            ".top-0": "top: 0",
             ".truncate": "white-space: nowrap; overflow: hidden; text-overflow: ellipsis",
             ".vh-100": "height: 100vh",
             ".w-100": "width: 100%",
             ".w-75": "width: 75%",
             ".ws-normal": "white-space: normal",
             ".ws-pre-wrap": "white-space: pre-wrap",
+            ".z-999": "z-index: 999",
             "@media screen and (max-width: 45em)": ".dn-s { display: none }",
             "mark": "background-color:#3BC2EB;color:black",
             ".bl--edited": "border-left-color:#ff4136;border-left-width:2px;border-left-style:solid",
@@ -2166,6 +2241,7 @@ class RecapWebRoot extends ZView_1.default {
         this.params = params;
         this.webviewParams = {
             style: Webview_1.default.defaultStyle,
+            switchRecapAction: this.createAction(this.loadRecapFile),
             toggleTargetViewAction: this.createAction(this.toggleTargetView)
         };
         this.linkTargetParams = { linkTargetProp: this.linkTargetProp };
@@ -2179,11 +2255,11 @@ class RecapWebRoot extends ZView_1.default {
     toggleTargetView() {
         // TODO
     }
-    loadNextRecapFile() {
-        const nextEntry = this.recapList[(this.currentRecapIndex + 1) % this.recapList.length];
-        this.loadRecapFile(nextEntry.path);
-        this.currentRecapIndex = this.currentRecapIndex + 1;
-    }
+    // loadNextRecapFile() {
+    //   const nextEntry = this.recapList[(this.currentRecapIndex + 1) % this.recapList.length];
+    //   this.loadRecapFile(nextEntry.path);
+    //   this.currentRecapIndex = this.currentRecapIndex + 1;
+    // }
     setRecapList(recapList) {
         this.recapList = recapList;
         this.loadRecapFile(recapList[0].path);
@@ -2207,8 +2283,8 @@ class RecapWebRoot extends ZView_1.default {
         this.addChild({ name: "webview", viewClass: Webview_1.default, params: this.webviewParams });
         this.addChild({ name: "linkTargetView", viewClass: LinkTargetView_1.default, params: this.linkTargetParams });
     }
-    async loadRecapFile(recapFileName) {
-        const response = await fetch("../../" + recapFileName);
+    async loadRecapFile(recapPath) {
+        const response = await fetch("../../" + recapPath);
         const recapContents = await response.text();
         const pluginFileNames = [
             "markdown-it-deflist.min.js",
@@ -2220,7 +2296,7 @@ class RecapWebRoot extends ZView_1.default {
         const data = {
             includeTargetText: false,
             mayGoBack: false,
-            mayQuickPick: (this.recapList.length > 1),
+            allRecapFiles: this.recapList,
             outputFileSpacing: 2,
             rootPath: "",
             runtime: false,
@@ -2249,21 +2325,29 @@ const RecapDocument_1 = __webpack_require__(694);
 const Extension_1 = __webpack_require__(732);
 const RootExtension_1 = __webpack_require__(896);
 const MarkdownConverter_1 = __webpack_require__(363);
+const RecapPopUp_1 = __webpack_require__(574);
 class Webview extends ZView_1.default {
     constructor(name, params, tagName) {
         super(name, params, tagName);
+        this.params = params;
         this.documentProp = this.createProp(null);
         this.editModeProp = this.createProp(false);
         this.annotationsProp = this.createProp([]);
         this.mayGoBackProp = this.createProp(false);
         this.mayQuickPickProp = this.createProp(false);
+        this.allRecapFilesProp = this.createProp([]);
         this.rootPathProp = this.createProp("");
         this.runtimeProp = this.createProp(false);
+        this.quickPickItemsProp = this.createProp([]);
+        this.quickPickVisibleProp = this.createProp(false);
+        this.quickPickPositionProp = this.createProp({ x: 0, y: 0 });
+        this.quickPickStyle = this.createProp(this.currentRecapQuickPickStyle);
         this.includeTargetTextProp = this.createProp(false);
         this.targetTextLengthProp = this.createProp(40);
         this.outputFileSpacingProp = this.createProp(0);
         this.initializeNotesContainerParams();
         this.initializeExtensionParams();
+        this.initializeRecapQuickPickParams();
         RootExtension_1.default.initialize(this.rootExtensionParams);
     }
     initializeNotesContainerParams() {
@@ -2272,6 +2356,7 @@ class Webview extends ZView_1.default {
             documentProp: this.documentProp,
             editModeProp: this.editModeProp,
             goBackAction: this.createAction(this.goBack, this.mayGoBackProp),
+            //loadDocumentAction: this.createAction(this.loadDocument),
             outputFileSpacingProp: this.outputFileSpacingProp,
             quickPickAction: this.createAction(this.quickPickRecapFile, this.mayQuickPickProp),
             revertAction: this.createAction(this.revert),
@@ -2284,13 +2369,26 @@ class Webview extends ZView_1.default {
             updateConfigAction: this.createAction(this.updateConfig),
         };
     }
+    initializeRecapQuickPickParams() {
+        this.recapQuickPickParams = {
+            style: this.quickPickStyle,
+            itemsProp: this.quickPickItemsProp,
+            itemStyle: "recapQuickPickItem",
+            clickAction: this.createAction(this.handleRecapQuickPick),
+            closeAction: this.createAction(this.hideRecapQuickPick),
+            positionProp: this.quickPickPositionProp,
+            visibleProp: this.quickPickVisibleProp,
+        };
+    }
     render() {
         this.addChild({ name: "notes-container", viewClass: NotesContainer_1.default, params: this.notesContainerParams });
+        this.addChild({ name: "recap-quickpick", viewClass: RecapPopUp_1.RecapPopUp, params: this.recapQuickPickParams });
     }
     initWebView(data) {
         this.includeTargetTextProp.set(data.includeTargetText);
         this.mayGoBackProp.set(data.mayGoBack);
-        this.mayQuickPickProp.set(data.mayQuickPick);
+        this.allRecapFilesProp.set(data.allRecapFiles);
+        this.mayQuickPickProp.set(data.allRecapFiles.length > 1);
         this.outputFileSpacingProp.set(data.outputFileSpacing);
         this.rootPathProp.set(data.rootPath);
         this.runtimeProp.set(data.runtime);
@@ -2309,8 +2407,35 @@ class Webview extends ZView_1.default {
         this.targetTextLengthProp.set(targetTextLength);
         this.outputFileSpacingProp.set(outputFileSpacing);
     }
-    quickPickRecapFile() {
-        Extension_1.default.quickPickRecapFile();
+    currentRecapQuickPickStyle() {
+        return this.quickPickVisibleProp.get() ? "recapQuickPick" : "hidden";
+    }
+    quickPickRecapFile(event) {
+        //if (true || Extension.isWebContext()) {
+        this.quickPickItemsProp.set(this.allRecapFilesProp.get());
+        this.showRecapQuickPick(event);
+        this.quickPickPositionProp.set({ x: event.clientX, y: event.clientY });
+        this.quickPickVisibleProp.set(true);
+        //} else {
+        //  Extension.quickPickRecapFile();
+        //}
+    }
+    showRecapQuickPick(event) {
+        this.quickPickPositionProp.set({ x: event.clientX, y: event.clientY });
+        this.quickPickVisibleProp.set(true);
+    }
+    handleRecapQuickPick(recapPath) {
+        console.log("handleRecapQuickPick: " + recapPath);
+        this.hideRecapQuickPick();
+        if (Extension_1.default.isWebContext()) {
+            this.params.switchRecapAction?.performWith(recapPath);
+        }
+        else {
+            Extension_1.default.openOtherRecapFile(recapPath);
+        }
+    }
+    hideRecapQuickPick() {
+        this.quickPickVisibleProp.set(false);
     }
     loadRecapDocument(text) {
         this.documentProp.set(RecapDocument_1.default.nullDocument);
@@ -2320,8 +2445,6 @@ class Webview extends ZView_1.default {
         this.annotationsProp.set(doc.annotations);
     }
     revert(text) {
-        //this.documentProp.set(RecapDocument.nullDocument);
-        //this.annotationsProp.set([]);
         this.loadRecapDocument(text);
     }
 }
@@ -2508,17 +2631,19 @@ class ZLabel extends ZView_1.default {
     constructor(name, params) {
         super(name, params);
         this.label = "";
-        this.label = params.label;
-        this.style = params.style;
+        this.params = params;
         if (params.clickAction) {
-            this.setClickAction(params.clickAction);
+            this.setClickAction(this.handleClick); // params.clickAction);
         }
     }
     render() {
-        this.setInnerText(z_1.default.valueof(this.label));
+        this.setInnerText(this.value());
     }
     handleClick() {
-        this.clickAction?.perform();
+        this.params.clickAction?.performWith(this.value());
+    }
+    value() {
+        return z_1.default.valueof(this.params.label);
     }
 }
 ZLabel.defaultStyle = "";
@@ -2747,6 +2872,9 @@ class ZView {
         this.params = params;
         this.elt = tagName === "body" ? document.body : document.createElement(tagName);
         this.style = params?.style || "";
+        if (params.tabIndex) {
+            this.elt.tabIndex = params.tabIndex; // should be zero for aria
+        }
         // stash this instance in the DOM for debugging
         // @ts-ignore
         this.elt["data-zaffre"] = this;
@@ -2931,6 +3059,10 @@ class ZView {
     setHeight(h) {
         this.elt.style.height = h.toString();
     }
+    setPosition(x, y) {
+        this.elt.style.left = `${x}px`;
+        this.elt.style.top = `${y}px`;
+    }
     /*
      *  Rendering
      */
@@ -3107,6 +3239,17 @@ class ZView {
         }
         return this;
     }
+    addOrRemoveEventListener(type, callback, add) {
+        if (callback) {
+            if (add) {
+                this.elt.addEventListener(type, callback);
+            }
+            else {
+                this.elt.removeEventListener(type, callback);
+            }
+        }
+        return this;
+    }
     addOrRemoveClass(cssClass, add) {
         if (add) {
             this.addClass(cssClass);
@@ -3137,6 +3280,9 @@ class ZView {
         this.elt.innerHTML = "";
         this.children = [];
         return this;
+    }
+    clientRect() {
+        return this.elt.getBoundingClientRect();
     }
     containsClass(cssClass) {
         return this.elt.classList.contains(cssClass);
@@ -3236,12 +3382,12 @@ class ZView {
         if (!this.elt.parentElement) {
             return this;
         }
-        const r = this.elt.getBoundingClientRect();
+        const r = this.clientRect();
         const h = this.elt.parentElement.getBoundingClientRect().height - 25;
         if (r.bottom > h) {
             this.elt.parentElement.scrollBy(0, r.bottom - h + 8);
         }
-        const rr = this.elt.getBoundingClientRect();
+        const rr = this.clientRect();
         if (rr.top < 0) {
             this.elt.parentElement.scrollBy(0, rr.top - 2);
         }
