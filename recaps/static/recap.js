@@ -1662,11 +1662,12 @@ class NotesContainer extends ZView_1.default {
             this.setInnerText("Error: Document is not a valid recap file");
             return;
         }
+        this.addChild({ name: "main-toolbar", viewClass: MainToolbar_1.default, params: this.mainToolbarParams });
         this.params.annotationsProp.get().forEach((note, index) => {
             this.addChild({ name: "noteview-" + note.id, viewClass: NoteView_1.default, params: { ...this.noteViewParams, note: note } });
         });
         this.addChild({ name: "selection-panel", viewClass: ZLabel_1.default, params: this.selectionDetailParams });
-        this.addChild({ name: "main-toolbar", viewClass: MainToolbar_1.default, params: this.mainToolbarParams });
+        this.addWrapping("toolbar-container", "", "main-toolbar");
         this.addWrapping("notes-container", this.notesContainerStyle, /noteview-*/);
     }
     selectedNoteView() {
@@ -2024,7 +2025,8 @@ class RecapStyle {
             "recap-note-unlinked": "b--dotted",
             "recap-note-changed": "b--selection bl--edited",
             "recap-note-unchanged": "b--selection",
-            "recap-toolbar": "f5 bottom-0 flex flex-row justify-between pa1 pl2 bt b--gray bg-color-button overflow-hidden  w-100 ",
+            //"recap-toolbar": "f5 bottom-0 flex flex-row justify-between pa1 pl2 bt b--gray bg-color-button overflow-hidden w-100 ",
+            "recap-toolbar": "f5 flex flex-row justify-between pa1 pl2 bt b--gray bg-color-button overflow-hidden w-100 ",
             "recap-toolbar-container": "pa0",
             "recap-button-group": "flex flex-row pr2",
             "recap-button-group-grow-1": "flex-grow-1 flex flex-row",
@@ -2139,7 +2141,7 @@ class RecapStyle {
             ".tl": "text-align: left",
             ".top-0": "top: 0",
             ".truncate": "white-space: nowrap; overflow: hidden; text-overflow: ellipsis",
-            ".vh-100": "height: calc(100vh - 44px)",
+            ".vh-100": "height:100vh",
             ".w-100": "width: 100%",
             ".w-75": "width: 75%",
             ".ws-normal": "white-space: normal",
