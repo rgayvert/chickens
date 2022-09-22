@@ -2296,7 +2296,7 @@ class RecapWebRoot extends ZView_1.default {
         const data = {
             includeTargetText: false,
             mayGoBack: false,
-            allRecapFiles: this.recapList,
+            allRecapFiles: this.recapList.map((entry) => entry.path),
             outputFileSpacing: 2,
             rootPath: "",
             runtime: false,
