@@ -1662,13 +1662,13 @@ class NotesContainer extends ZView_1.default {
             this.setInnerText("Error: Document is not a valid recap file");
             return;
         }
-        this.addChild({ name: "main-toolbar", viewClass: MainToolbar_1.default, params: this.mainToolbarParams });
         this.params.annotationsProp.get().forEach((note, index) => {
             this.addChild({ name: "noteview-" + note.id, viewClass: NoteView_1.default, params: { ...this.noteViewParams, note: note } });
         });
         this.addChild({ name: "selection-panel", viewClass: ZLabel_1.default, params: this.selectionDetailParams });
-        this.addWrapping("toolbar-container", "", "main-toolbar");
+        this.addChild({ name: "main-toolbar", viewClass: MainToolbar_1.default, params: this.mainToolbarParams });
         this.addWrapping("notes-container", this.notesContainerStyle, /noteview-*/);
+        this.addWrapping("toolbar-container", "", "main-toolbar");
     }
     selectedNoteView() {
         return this.selectedNoteViewProp.get();
