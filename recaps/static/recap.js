@@ -1504,6 +1504,7 @@ exports["default"] = NoteView;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const ZView_1 = __webpack_require__(928);
 const ZLabel_1 = __webpack_require__(974);
+const ZStyle_1 = __webpack_require__(738);
 const z_1 = __webpack_require__(813);
 const NoteView_1 = __webpack_require__(508);
 const MainToolbar_1 = __webpack_require__(512);
@@ -1619,18 +1620,6 @@ class NotesContainer extends ZView_1.default {
             viewHiddenAction: this.createAction(this.viewHidden),
         };
     }
-    afterRender() {
-        if (this.document() === RecapDocument_1.default.nullDocument) {
-            // we're in the process of reverting or loading a new document
-            return;
-        }
-        if (this.documentIsEmpty()) {
-            this.addNote().toggleEdit();
-        }
-        else if (!this.selectedNoteViewProp.get()) {
-            setTimeout(() => this.firstNoteView()?.select().expand(), 500);
-        }
-    }
     noteViews() {
         return (this.children.filter((c) => c instanceof NoteView_1.default));
     }
@@ -1667,8 +1656,26 @@ class NotesContainer extends ZView_1.default {
         });
         this.addChild({ name: "selection-panel", viewClass: ZLabel_1.default, params: this.selectionDetailParams });
         this.addChild({ name: "main-toolbar", viewClass: MainToolbar_1.default, params: this.mainToolbarParams });
-        this.addWrapping("notes-container", this.notesContainerStyle, /noteview-*/);
-        this.addWrapping("toolbar-container", "", "main-toolbar");
+        if (ZStyle_1.default.deviceIsMobile()) {
+            this.addWrapping("toolbar-container", "", "main-toolbar");
+            this.addWrapping("notes-container", this.notesContainerStyle, /noteview-*/);
+        }
+        else {
+            this.addWrapping("notes-container", this.notesContainerStyle, /noteview-*/);
+            this.addWrapping("toolbar-container", "", "main-toolbar");
+        }
+    }
+    afterRender() {
+        if (this.document() === RecapDocument_1.default.nullDocument) {
+            // we're in the process of reverting or loading a new document
+            return;
+        }
+        if (this.documentIsEmpty()) {
+            this.addNote().toggleEdit();
+        }
+        else if (!this.selectedNoteViewProp.get()) {
+            setTimeout(() => this.firstNoteView()?.select().expand(), 500);
+        }
     }
     selectedNoteView() {
         return this.selectedNoteViewProp.get();
@@ -2025,8 +2032,8 @@ class RecapStyle {
             "recap-note-unlinked": "b--dotted",
             "recap-note-changed": "b--selection bl--edited",
             "recap-note-unchanged": "b--selection",
-            //"recap-toolbar": "f5 bottom-0 flex flex-row justify-between pa1 pl2 bt b--gray bg-color-button overflow-hidden w-100 ",
-            "recap-toolbar": "f5 flex flex-row justify-between pa1 pl2 bt b--gray bg-color-button overflow-hidden w-100 ",
+            "recap-toolbar": "f5 bottom-0 flex flex-row justify-between pa1 pl2 bt b--gray bg-color-button overflow-hidden w-100 ",
+            //"recap-toolbar": "f5 flex flex-row justify-between pa1 pl2 bt b--gray bg-color-button overflow-hidden w-100 ",
             "recap-toolbar-container": "pa0",
             "recap-button-group": "flex flex-row pr2",
             "recap-button-group-grow-1": "flex-grow-1 flex flex-row",
@@ -2833,8 +2840,14 @@ class ZStyle {
         // reset; Safari requires these to be set separately
         ["html", "body", "h1", "h2", "h3", "h4", "h5", "h6", "p"].forEach((tag) => this.addRule(tag, "margin: 0; padding: 0; border: 0; box-sizing: border-box"));
     }
+    static deviceIsMobile() {
+        return (navigator.userAgent.match(/Android/i) ||
+            navigator.userAgent.match(/iPad/i) ||
+            navigator.userAgent.match(/iPhone/i));
+        //return window.matchMedia("only screen and (max-width: 1279px)").matches;
+    }
 }
-ZStyle.compositeStyles = new Map;
+ZStyle.compositeStyles = new Map();
 exports["default"] = ZStyle;
 
 
