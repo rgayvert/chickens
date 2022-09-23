@@ -2841,9 +2841,8 @@ class ZStyle {
         ["html", "body", "h1", "h2", "h3", "h4", "h5", "h6", "p"].forEach((tag) => this.addRule(tag, "margin: 0; padding: 0; border: 0; box-sizing: border-box"));
     }
     static deviceIsMobile() {
-        return (
-        //window.matchMedia("only screen and (max-width: 1279px)").matches ||
-        navigator.userAgent.match(/Android/i) ||
+        return (window.matchMedia("only screen and (max-width: 767)").matches ||
+            navigator.userAgent.match(/Android/i) ||
             navigator.userAgent.match(/iPad/i) ||
             navigator.userAgent.match(/iPhone/i));
     }
