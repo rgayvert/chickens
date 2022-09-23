@@ -2032,7 +2032,7 @@ class RecapStyle {
             "recap-note-unlinked": "b--dotted",
             "recap-note-changed": "b--selection bl--edited",
             "recap-note-unchanged": "b--selection",
-            "recap-toolbar": "f5 bottom-0 flex flex-row justify-between pa1 pl2 bt b--gray bg-color-button overflow-hidden w-100 ",
+            "recap-toolbar": "f5 bottom-0 flex flex-row justify-between pa1 pl2 ba b--gray bg-color-button overflow-hidden w-100 ",
             //"recap-toolbar": "f5 flex flex-row justify-between pa1 pl2 bt b--gray bg-color-button overflow-hidden w-100 ",
             "recap-toolbar-container": "pa0",
             "recap-button-group": "flex flex-row pr2",
@@ -2841,10 +2841,11 @@ class ZStyle {
         ["html", "body", "h1", "h2", "h3", "h4", "h5", "h6", "p"].forEach((tag) => this.addRule(tag, "margin: 0; padding: 0; border: 0; box-sizing: border-box"));
     }
     static deviceIsMobile() {
-        return (navigator.userAgent.match(/Android/i) ||
+        return (
+        //window.matchMedia("only screen and (max-width: 1279px)").matches ||
+        navigator.userAgent.match(/Android/i) ||
             navigator.userAgent.match(/iPad/i) ||
             navigator.userAgent.match(/iPhone/i));
-        //return window.matchMedia("only screen and (max-width: 1279px)").matches;
     }
 }
 ZStyle.compositeStyles = new Map();
