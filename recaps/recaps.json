@@ -2,15 +2,7 @@
   "recaps": [
     {
       "title": "initial-html",
-      "path": "./recaps/initial-html.recap"
-    },
-    {
-      "title": "markdown-samples",
-      "path": "./recaps/markdown-samples.recap"
-    },
-    {
-      "title": "sample",
-      "path": "./recaps/sample.recap"
+      "path": "./recaps/initial-html/initial-html.recap"
     }
   ]
 }
