@@ -1648,7 +1648,7 @@ class NotesContainer extends ZView_1.default {
             return;
         }
         if (!doc.isValid()) {
-            this.setInnerText("Error: Document is not a valid recap file");
+            //this.setInnerText("Error: Document is not a valid recap file");
             //@ts-ignore
             this.setInnerText(navigator.userAgentData.mobile.toString());
             return;
