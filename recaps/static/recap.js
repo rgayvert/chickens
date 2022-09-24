@@ -1648,9 +1648,7 @@ class NotesContainer extends ZView_1.default {
             return;
         }
         if (!doc.isValid()) {
-            //this.setInnerText("Error: Document is not a valid recap file");
-            //@ts-ignore
-            this.setInnerText(navigator.userAgentData.mobile.toString());
+            this.setInnerText("Error: Document is not a valid recap file");
             return;
         }
         this.params.annotationsProp.get().forEach((note, index) => {
@@ -1969,6 +1967,7 @@ class RecapPopUp extends ZView_1.default {
                 },
             });
         });
+        this.addWrapping("popup-container", "recap-popup-container", /item-*/);
     }
     close() {
         this.params.closeAction.perform();
@@ -2046,8 +2045,9 @@ class RecapStyle {
             "recap-toolbar-button-disabled": "{recap-button-base} scale-12 cursor-auto o-30",
             "recap-centered-title": "db w-100 tc mb3",
             "hidden": "dn",
-            "recapQuickPick": "db z-999 maxh50 fixed top-0 left-100 bg-lightgray ba br3 pa2",
-            "recapQuickPickItem": "hover-pointer f5 black-90 ma1 hover-bg-blue"
+            "recap-quick-pick": "db z-999 maxh30 fixed top-0 left-100 bg-lightgray ba br3 pa2",
+            "recap-quick-pick-item": "hover-pointer f5 black-90 hover-bg-blue",
+            "recap-popup-container": "ma2"
         };
         Object.keys(allStyles).forEach((selector) => {
             ZStyle_1.default.addCompositeStyle(selector, allStyles[selector]);
@@ -2385,7 +2385,7 @@ class Webview extends ZView_1.default {
         this.recapQuickPickParams = {
             style: this.quickPickStyle,
             itemsProp: this.quickPickItemsProp,
-            itemStyle: "recapQuickPickItem",
+            itemStyle: "recap-quick-pick-item",
             clickAction: this.createAction(this.handleRecapQuickPick),
             closeAction: this.createAction(this.hideRecapQuickPick),
             positionProp: this.quickPickPositionProp,
@@ -2420,7 +2420,7 @@ class Webview extends ZView_1.default {
         this.outputFileSpacingProp.set(outputFileSpacing);
     }
     currentRecapQuickPickStyle() {
-        return this.quickPickVisibleProp.get() ? "recapQuickPick" : "hidden";
+        return this.quickPickVisibleProp.get() ? "recap-quick-pick" : "hidden";
     }
     quickPickRecapFile(event) {
         //if (true || Extension.isWebContext()) {
@@ -2437,7 +2437,6 @@ class Webview extends ZView_1.default {
         this.quickPickVisibleProp.set(true);
     }
     handleRecapQuickPick(recapPath) {
-        console.log("handleRecapQuickPick: " + recapPath);
         this.hideRecapQuickPick();
         if (Extension_1.default.isWebContext()) {
             this.params.switchRecapAction?.performWith(recapPath);
