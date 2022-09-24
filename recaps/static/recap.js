@@ -1955,7 +1955,7 @@ class RecapPopUp extends ZView_1.default {
         super.applyStyle();
         const pos = this.params.positionProp.get();
         const rect = this.clientRect();
-        this.setPosition(pos.x - rect.width + 10, pos.y - rect.height + 10);
+        this.setPosition(pos.x - rect.width + 10, Math.max(10, pos.y - rect.height + 10));
     }
     render() {
         this.params.itemsProp.get().forEach((item, index) => {
