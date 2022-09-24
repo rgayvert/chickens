@@ -1944,9 +1944,11 @@ class RecapPopUp extends ZView_1.default {
     visibilityChanged(visible) {
         if (visible) {
             window.addEventListener("click", this.windowClickHandler);
+            window.addEventListener("touchstart", this.windowClickHandler);
         }
         else {
             window.removeEventListener("click", this.windowClickHandler);
+            window.removeEventListener("touchstart", this.windowClickHandler);
         }
     }
     applyStyle() {
