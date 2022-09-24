@@ -1967,7 +1967,7 @@ class RecapPopUp extends ZView_1.default {
                 },
             });
         });
-        this.addWrapping("popup-container", "recap-popup-container", /item-*/);
+        this.addWrapping("popup-container", "recap-quick-pick-item-container", /item-*/);
     }
     close() {
         this.params.closeAction.perform();
@@ -2045,9 +2045,9 @@ class RecapStyle {
             "recap-toolbar-button-disabled": "{recap-button-base} scale-12 cursor-auto o-30",
             "recap-centered-title": "db w-100 tc mb3",
             "hidden": "dn",
-            "recap-quick-pick": "db z-999 maxh30 fixed top-0 left-100 bg-lightgray ba br3 pa2",
-            "recap-quick-pick-item": "hover-pointer f5 black-90 hover-bg-blue",
-            "recap-popup-container": "ma2"
+            "recap-quick-pick": "db z-999 fixed top-0 left-100 bg-lightgray ba br3",
+            "recap-quick-pick-item-container": "maxh30 ma1",
+            "recap-quick-pick-item": "hover-pointer f5 black-90 hover-bg-blue ma1",
         };
         Object.keys(allStyles).forEach((selector) => {
             ZStyle_1.default.addCompositeStyle(selector, allStyles[selector]);
