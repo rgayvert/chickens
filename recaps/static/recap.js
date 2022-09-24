@@ -1658,7 +1658,7 @@ class NotesContainer extends ZView_1.default {
         });
         this.addChild({ name: "selection-panel", viewClass: ZLabel_1.default, params: this.selectionDetailParams });
         this.addChild({ name: "main-toolbar", viewClass: MainToolbar_1.default, params: this.mainToolbarParams });
-        if (ZStyle_1.default.deviceIsMobile()) {
+        if (ZStyle_1.default.deviceIsIOS()) {
             this.addWrapping("toolbar-container", "", "main-toolbar");
             this.addWrapping("notes-container", this.notesContainerStyle, /noteview-*/);
         }
@@ -2842,13 +2842,11 @@ class ZStyle {
         // reset; Safari requires these to be set separately
         ["html", "body", "h1", "h2", "h3", "h4", "h5", "h6", "p"].forEach((tag) => this.addRule(tag, "margin: 0; padding: 0; border: 0; box-sizing: border-box"));
     }
-    static deviceIsMobile() {
-        return (
-        //window.matchMedia("only screen and (max-width: 767px)").matches ||
-        navigator.platform.match(/iPad/i) ||
-            navigator.userAgent.match(/Android/i) ||
-            navigator.userAgent.match(/iPad/i) ||
-            navigator.userAgent.match(/iPhone/i));
+    static deviceIsIOS() {
+        if (/iPad|iPhone|iPod/.test(navigator.platform)) {
+            return true;
+        }
+        return navigator.maxTouchPoints && navigator.maxTouchPoints > 2 && /MacIntel/.test(navigator.platform);
     }
 }
 ZStyle.compositeStyles = new Map();
