@@ -1,0 +1,16 @@
+{
+  "annotations": [
+    {
+      "id": 1,
+      "contents": "## A recap file is JSON",
+      "file": "",
+      "selections": []
+    },
+    {
+      "id": 2,
+      "contents": "## untitled",
+      "file": "",
+      "selections": []
+    }
+  ]
+}

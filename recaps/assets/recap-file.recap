@@ -1,0 +1,29 @@
+{
+  "annotations": [
+    {
+      "id": 1,
+      "contents": "## Recap file structure\nA recap file is a JSON file containing a simple list of notes, each of which contains a Markdown string along\nwith an optional specification of a link to a selection in a source file.",
+      "file": "",
+      "selections": []
+    },
+    {
+      "id": 3,
+      "contents": "## Markdown content\n\n\nThe text contents of a note consists of ordinary Markdown with a few additions specific\nto Recap and VS Code.\nBefore displaying a note, Recap converts the Markdown to HTML using \n[markdown-it](https://github.com/markdown-it), then sanitizes the HTML\nusing [dompurify](https://github.com/cure53/DOMPurify).\n<br/><br/>\nMarkdown links to external sites will be displayed in the default browser, while\nlinks to files local to the project will be displayed in an adjacent column in VS Code.\n<br/><br/>\nLinks to local text files must be begin with a special \n<br/>\n```\n    [local file](recaplink?src/App.js)\n<br/><br/>\n\n",
+      "file": "",
+      "selections": []
+    },
+    {
+      "id": 4,
+      "contents": "## Links\nEach link consists of a file path and a specification of a link destination. The file path must be relative\nto the root of the workspace. The link destination is an array of integers, interpreted as \n<br/><br/>\n\n```\n    startLine, startCharacter, endLine, endCharacter\n```\n<br/><br/>\n\nIf the destination selection contained more than one range, the additional ranges will appear in this list\nas sets of four consecutive integers.\n<br/>\n",
+      "file": "recaps/assets/markdown-samples.md",
+      "selections": [
+        [
+          12,
+          26,
+          12,
+          26
+        ]
+      ]
+    }
+  ]
+}
