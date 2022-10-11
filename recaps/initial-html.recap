@@ -1,10 +1,14 @@
 {
   "annotations": [
     {
+      "changed": false,
+      "markdownLinkTargets": [],
+      "resources": [],
       "contents": "## RecapEditorProvider.getHtmlForWebview() returns the initial page contents\n\n\n",
       "id": 0,
-      "changed": false,
       "primaryLinkTarget": {
+        "text": "",
+        "html": "",
         "file": "src/vscode/RecapEditor.ts",
         "selections": [
           [
@@ -22,14 +26,17 @@
         ],
         "targetText": "interface RecapDocumentDelegate {",
         "targetOffset": 0
-      },
-      "markdownLinkTargets": []
+      }
     },
     {
+      "changed": false,
+      "markdownLinkTargets": [],
+      "resources": [],
       "contents": "## This is a title\n\nabcdefg\n\n\n",
       "id": 1,
-      "changed": false,
       "primaryLinkTarget": {
+        "text": "",
+        "html": "",
         "file": "src/vscode/extension.ts",
         "selections": [
           [
@@ -41,14 +48,19 @@
         ],
         "targetText": "export function activate(context: vscode",
         "targetOffset": 0
-      },
-      "markdownLinkTargets": []
+      }
     },
     {
+      "changed": false,
+      "markdownLinkTargets": [],
+      "resources": [
+        "src/vscode/RecapEditor.ts"
+      ],
       "contents": "## A **nonce** (generated only once) token is created.\n\n\nThis token is passed to the page [security policy](src/vscode/RecapEditor.ts:538,0,539,0) \nand each of the [scripts](src/vscode/RecapEditor.ts:602,0,604,63) in the page.\n\n\n",
       "id": 2,
-      "changed": false,
       "primaryLinkTarget": {
+        "text": "",
+        "html": "",
         "file": "src/vscode/util.ts",
         "selections": [
           [
@@ -60,28 +72,14 @@
         ],
         "targetText": "export function quickDebug(s: string): v",
         "targetOffset": 2
-      },
-      "markdownLinkTargets": []
+      }
     },
     {
-      "contents": "## The paths to the scripts and stylesheets are [converted](recaps/assets/markdown-samples.md:28,0,30,7) to URIs that VS Code will allow.\n\n\n",
-      "id": 3,
       "changed": false,
-      "primaryLinkTarget": {
-        "file": "src/vscode/util.ts",
-        "selections": [
-          [
-            3,
-            2,
-            3,
-            2
-          ]
-        ],
-        "targetText": "",
-        "targetOffset": 0
-      },
       "markdownLinkTargets": [
         {
+          "text": "",
+          "html": "",
           "file": "recaps/assets/markdown-samples.md",
           "selections": [
             [
@@ -94,27 +92,34 @@
           "targetText": "* One\n* Two\n* Three",
           "targetOffset": 0
         }
-      ]
-    },
-    {
-      "contents": "## If a custom CSS file exists (recap.css), it is included.\n \n\nHere's a [markdown](src/vscode/RecapEditor.ts:516,0,520,0) link.\n\n\n",
-      "id": 4,
-      "changed": false,
+      ],
+      "resources": [
+        "recaps/assets/markdown-samples.md"
+      ],
+      "contents": "## The paths to the scripts and stylesheets are [converted](recaps/assets/markdown-samples.md:28,0,30,7) to URIs that VS Code will allow.\nAnother line.\n\n\n",
+      "id": 3,
       "primaryLinkTarget": {
-        "file": "src/vscode/RecapEditor.ts",
+        "text": "",
+        "html": "",
+        "file": "src/vscode/util.ts",
         "selections": [
           [
-            16,
-            0,
-            28,
-            0
+            3,
+            2,
+            3,
+            2
           ]
         ],
-        "targetText": "interface MessageArgs {",
+        "targetText": "",
         "targetOffset": 0
-      },
+      }
+    },
+    {
+      "changed": false,
       "markdownLinkTargets": [
         {
+          "text": "",
+          "html": "",
           "file": "media/recap.css",
           "selections": [
             [
@@ -128,6 +133,8 @@
           "targetOffset": 0
         },
         {
+          "text": "",
+          "html": "",
           "file": "src/RecapEditor.ts",
           "selections": [
             [
@@ -140,13 +147,39 @@
           "targetText": "// Local css paths",
           "targetOffset": 0
         }
-      ]
+      ],
+      "resources": [
+        "src/vscode/RecapEditor.ts"
+      ],
+      "contents": "## If a custom CSS file exists (recap.css), it is included.\n \n\nHere's a [markdown](src/vscode/RecapEditor.ts:516,0,520,0) link.\n\n\n",
+      "id": 4,
+      "primaryLinkTarget": {
+        "text": "",
+        "html": "",
+        "file": "src/vscode/RecapEditor.ts",
+        "selections": [
+          [
+            16,
+            0,
+            28,
+            0
+          ]
+        ],
+        "targetText": "interface MessageArgs {",
+        "targetOffset": 0
+      }
     },
     {
+      "changed": false,
+      "markdownLinkTargets": [],
+      "resources": [
+        "recaps/sample.recap"
+      ],
       "contents": "## The static components of the page are added:\n\nthe container for [notes](recaps/sample.recap)\n\nthe selection detail\n\nthe bottom toolbar\n\nthe edit toolbar\n\n\n",
       "id": 5,
-      "changed": false,
       "primaryLinkTarget": {
+        "text": "",
+        "html": "",
         "file": "src/recap-web/Extension.js",
         "selections": [
           [
@@ -158,8 +191,11 @@
         ],
         "targetText": "// Messages to the extension",
         "targetOffset": 0
-      },
-      "markdownLinkTargets": []
+      }
     }
-  ]
+  ],
+  "title": "initial-html",
+  "author": "",
+  "creationDate": "Tue Oct 11 2022",
+  "description": ""
 }

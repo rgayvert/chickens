@@ -40,6 +40,14 @@ p {
 	margin-bottom: 0.7em;
 }
 
+dd {
+	margin-bottom: 1em;
+}
+dt {
+	margin-bottom: 0.5em;
+	font-size: 125%;
+}
+
 ul,
 ol {
 	margin-bottom: 0.7em;

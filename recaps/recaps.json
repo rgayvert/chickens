@@ -1,12 +1,8 @@
 {
   "recaps": [
     {
-      "title": "sample3",
-      "path": "./more_recaps/sample3.recap"
-    },
-    {
-      "title": "sample4",
-      "path": "./more_recaps/sample4.recap"
+      "title": "index",
+      "path": "./recaps/index.recap"
     },
     {
       "title": "initial-html",
@@ -19,10 +15,6 @@
     {
       "title": "sample",
       "path": "./recaps/sample.recap"
-    },
-    {
-      "title": "recap-help",
-      "path": "./recaps/static/recap-help.recap"
     }
   ]
 }
