@@ -1,0 +1,256 @@
+{
+  "annotations": [
+    {
+      "contents": "## Headings\n\n\n# h1 Heading 8-)\n## h2 Heading\n### h3 Heading\n#### h4 Heading\n##### h5 Heading\n###### h6 Heading\n\n\n",
+      "id": 0,
+      "primaryLinkTarget": {
+        "file": "recaps/markdown-it-demo.md",
+        "selections": [
+          [
+            0,
+            0,
+            8,
+            17
+          ]
+        ],
+        "targetText": "# h1 Heading 8-)",
+        "targetOffset": 3
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Horizontal Rules\n\n___\n\n---\n\n***\n\n\n",
+      "id": 1,
+      "primaryLinkTarget": {
+        "file": "recaps/markdown-it-demo.md",
+        "selections": [
+          [
+            10,
+            0,
+            16,
+            3
+          ]
+        ],
+        "targetText": "## Horizontal Rules",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Typographics replacements\n\n(c) (C) (r) (R) (tm) (TM) (p) (P) +-\n\ntest.. test... test..... test?..... test!....\n\n!!!!!! ???? ,,  -- ---\n\n\"Smartypants, double quotes\" and 'single quotes'\n\n\n",
+      "id": 2,
+      "primaryLinkTarget": {
+        "file": "recaps/markdown-it-demo.md",
+        "selections": [
+          [
+            18,
+            0,
+            26,
+            48
+          ]
+        ],
+        "targetText": "## Typographics replacements",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Emphasis\n\n**This is bold text**\n\n__This is bold text__\n\n*This is italic text*\n\n_This is italic text_\n\n~~Strikethrough~~\n\n\n",
+      "id": 3,
+      "primaryLinkTarget": {
+        "file": "recaps/markdown-it-demo.md",
+        "selections": [
+          [
+            28,
+            0,
+            38,
+            17
+          ]
+        ],
+        "targetText": "**This is bold text**",
+        "targetOffset": 2
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Blockquotes\n\n\n> Blockquotes can also be nested...\n>> ...by using additional greater-than signs right next to each other...\n> > > ...or with spaces between arrows.\n\n\n",
+      "id": 4,
+      "primaryLinkTarget": {
+        "file": "recaps/markdown-it-demo.md",
+        "selections": [
+          [
+            40,
+            0,
+            46,
+            0
+          ]
+        ],
+        "targetText": "## Blockquotes",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Lists\n\n\nUnordered\n\n+ Create a list by starting a line with `+`, `-`, or `*`\n+ Sub-lists are made by indenting 2 spaces:\n  - Marker character change forces new list start:\n    * Ac tristique libero volutpat at\n    + Facilisis in pretium nisl aliquet\n    - Nulla volutpat aliquam velit\n+ Very easy!\n\nOrdered\n\n1. Lorem ipsum dolor sit amet\n2. Consectetur adipiscing elit\n3. Integer molestie lorem at massa\n\n\n1. You can use sequential numbers...\n1. ...or keep all the numbers as `1.`\n\nStart numbering with offset:\n\n57. foo\n1. bar\n\n\n",
+      "id": 5,
+      "primaryLinkTarget": {
+        "file": "recaps/markdown-it-demo.md",
+        "selections": [
+          [
+            47,
+            0,
+            74,
+            0
+          ]
+        ],
+        "targetText": "+ Create a list by starting a line with ",
+        "targetOffset": 5
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Code\n\nInline `code`\n\nIndented code\n\n    // Some comments\n    line 1 of code\n    line 2 of code\n    line 3 of code  \n\nBlock code \"fences\"\n\n```\nSample text here...\n```\n\nSyntax highlighting\n\n``` js\n// local script\nconst foo = function (bar) { \n  return bar++;\n};\n\nconsole.log(foo(5));\n```\n\n\n",
+      "id": 6,
+      "primaryLinkTarget": {
+        "file": "recaps/markdown-it-demo.md",
+        "selections": [
+          [
+            75,
+            0,
+            101,
+            3
+          ]
+        ],
+        "targetText": "Block code \"fences\"",
+        "targetOffset": 11
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Tables\n\n| Option | Description |\n| ------ | ----------- |\n| data   | path to data files to supply the data that will be passed into templates. |\n| engine | engine to be used for processing templates. Handlebars is the default. |\n| ext    | extension to be used for dest files. |\n\n\n",
+      "id": 7,
+      "primaryLinkTarget": {
+        "file": "recaps/markdown-it-demo.md",
+        "selections": [
+          [
+            103,
+            0,
+            111,
+            0
+          ]
+        ],
+        "targetText": "| Option | Description |",
+        "targetOffset": 2
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Links\n\n\n[link text](http://dev.nodeca.com)\n\n[link with title](http://nodeca.github.io/pica/demo/ \"title text!\")\n\nAutoconverted link https://github.com/nodeca/pica\n\n\n",
+      "id": 8,
+      "primaryLinkTarget": {
+        "file": "recaps/markdown-it-demo.md",
+        "selections": [
+          [
+            112,
+            0,
+            119,
+            49
+          ]
+        ],
+        "targetText": "[link text](http://dev.nodeca.com)",
+        "targetOffset": 3
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Emojis\n\n\n> Classic markup: :wink: :crush: :cry: :tear: :laughing: :yum:\n>\n> Shortcuts (emoticons): :-) :-( 8-) ;)\n\n\n",
+      "id": 9,
+      "primaryLinkTarget": {
+        "file": "recaps/markdown-it-demo.md",
+        "selections": [
+          [
+            121,
+            0,
+            127,
+            0
+          ]
+        ],
+        "targetText": "> Classic markup: :wink: :crush: :cry: :",
+        "targetOffset": 3
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Subscript / Superscript\n\n- 19^th^\n- H~2~O\n\n\n",
+      "id": 10,
+      "primaryLinkTarget": {
+        "file": "recaps/markdown-it-demo.md",
+        "selections": [
+          [
+            129,
+            0,
+            133,
+            0
+          ]
+        ],
+        "targetText": "## Subscript / Superscript",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Footnotes\n\n\nFootnote 1 link[^first].\n\nFootnote 2 link[^second].\n\nInline footnote^[Text of inline footnote] definition.\n\nDuplicated footnote reference[^second].\n\n[^first]: Footnote **can have markup**\n\n    and multiple paragraphs.\n\n[^second]: Footnote text.\n\n\n",
+      "id": 11,
+      "primaryLinkTarget": {
+        "file": "recaps/markdown-it-demo.md",
+        "selections": [
+          [
+            134,
+            0,
+            149,
+            25
+          ]
+        ],
+        "targetText": "Footnote 1 link[^first].",
+        "targetOffset": 3
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Definition Lists\n\nTerm 1\n\n:   Definition 1\nwith lazy continuation.\n\nTerm 2 with *inline markup*\n\n:   Definition 2\n\n        { some code, part of Definition 2 }\n\n    Third paragraph of definition 2.\n\n_Compact style:_\n\nTerm 1\n  ~ Definition 1\n\nTerm 2\n  ~ Definition 2a\n  ~ Definition 2b\n\n\n",
+      "id": 12,
+      "primaryLinkTarget": {
+        "file": "recaps/markdown-it-demo.md",
+        "selections": [
+          [
+            151,
+            0,
+            174,
+            0
+          ]
+        ],
+        "targetText": "## Definition Lists",
+        "targetOffset": 0
+      },
+      "markdownLinkTargets": []
+    },
+    {
+      "contents": "## Unicode\n\n\n&#3058; &#3047;\n&#8364; &#x20AC; &euro;\n\nсоветских военных судов и самолетов\n\n\n        久有归天愿\n        终过鬼门关\n        千里来寻归宿\n        春华变苍颜\n        到处群魔乱舞\n        更有妖雾盘绕\n        暗道入阴间\n        过了阎王殿\n        险处不须看\n\n\n",
+      "id": 13,
+      "primaryLinkTarget": {
+        "file": "recaps/markdown-it-demo.md",
+        "selections": [
+          [
+            175,
+            1,
+            192,
+            13
+          ]
+        ],
+        "targetText": "&#8364; &#x20AC; &euro;",
+        "targetOffset": 4
+      },
+      "markdownLinkTargets": []
+    }
+  ]
+}

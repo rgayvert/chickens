@@ -1,0 +1,26 @@
+{
+  "annotations": [
+    {
+      "changed": false,
+      "markdownLinkTargets": [],
+      "resources": [
+        "recaps/initial-html.recap",
+        "recaps/markdown-it-demo/markdown-it-demo.recap"
+      ],
+      "contents": "[Initial HTML](recaps/initial-html.recap)\n~ Describes the creation of the HTML by the RecapEditorProvider in the extension core.\n\n[Markdown-it Demo](recaps/markdown-it-demo/markdown-it-demo.recap)\n~ Demonstrates the capabilities of markdown-it, following https://markdown-it.github.io.\n\n\n",
+      "id": 0,
+      "primaryLinkTarget": {
+        "text": "",
+        "html": "",
+        "file": "",
+        "selections": [],
+        "targetText": "",
+        "targetOffset": 0
+      }
+    }
+  ],
+  "title": "index",
+  "author": "",
+  "creationDate": "Mon Oct 10 2022",
+  "description": ""
+}
