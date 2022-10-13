@@ -1,6 +1,10 @@
 {
   "recaps": [
     {
+      "title": "sample3",
+      "path": "./more_recaps/sample3.recap"
+    },
+    {
       "title": "index",
       "path": "./recaps/index.recap"
     },
@@ -9,8 +13,8 @@
       "path": "./recaps/initial-html.recap"
     },
     {
-      "title": "markdown-samples",
-      "path": "./recaps/markdown-samples.recap"
+      "title": "markdown-it-demo",
+      "path": "./recaps/markdown-it-demo/markdown-it-demo.recap"
     },
     {
       "title": "sample",
