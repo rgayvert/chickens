@@ -5,6 +5,14 @@
       "path": "./more_recaps/sample3.recap"
     },
     {
+      "title": "sample4",
+      "path": "./more_recaps/sample4.recap"
+    },
+    {
+      "title": "recap-file",
+      "path": "./recaps/assets/recap-file.recap"
+    },
+    {
       "title": "index",
       "path": "./recaps/index.recap"
     },
@@ -17,8 +25,16 @@
       "path": "./recaps/markdown-it-demo/markdown-it-demo.recap"
     },
     {
+      "title": "markdown-samples",
+      "path": "./recaps/markdown-samples.recap"
+    },
+    {
       "title": "sample",
       "path": "./recaps/sample.recap"
+    },
+    {
+      "title": "recap-help",
+      "path": "./recaps/static/recap-help.recap"
     }
   ]
 }
